@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Control web SDR</title>
+
+  <link rel="icon" href="{{ url_for('static', filename='images/poza_web.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div class="container my-4">
+    <h1 class="sdr-title text-center mb-4">
+      <img src="{{ url_for('static', filename='images/poza_web.png') }}" alt="icon" class="sdr-icon">
+      Control parametri SDR din interfața web
+    </h1>
+
+    <div id="status-msg" class="alert text-center fw-bold d-none" role="alert">
+      Se aplică modificările...
+    </div>
+
+    <div class="main-layout d-flex flex-lg-row flex-column gap-4">
+      <form id="control" class="p-4 rounded shadow-sm mb-4 mb-lg-0 flex-fill" style="min-width: 340px; max-width: 400px;">
+        <h5 class="text-center text-muted mb-3">Parametri SDR</h5>
+
+        <div class="mb-3">
+          <label for="frequency" class="form-label">Frecvență:</label>
+          <div class="input-group">
+            <input type="number" id="frequency" class="form-control" step="any" required>
+            <select id="freq_unit" class="form-select">
+              <option value="1">Hz</option>
+              <option value="1000">kHz</option>
+              <option value="1000000" selected>MHz</option>
+              <option value="1000000000">GHz</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="sample_rate" class="form-label">Rata de eșantionare:</label>
+          <div class="input-group">
+            <input type="number" id="sample_rate" class="form-control" step="any" required>
+            <select id="samp_unit" class="form-select">
+              <option value="1">Hz</option>
+              <option value="1000" selected>kHz</option>
+              <option value="1000000">MHz</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="gain" class="form-label">Câștig:</label>
+          <input type="number" id="gain" class="form-control" step="any" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 fw-bold">Aplică modificările</button>
+      </form>
+
+      <div class="flex-grow-1">
+        <div class="mb-4">
+          <div id="spectrum" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div>
+          <div id="waterfall" style="width: 100%; height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-msg"></div>
+
+  <footer class="text-center mt-5 text-muted small">
+    Hergheligiu Anca-Andreea - Licență 2025
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+
