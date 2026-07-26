@@ -67,7 +67,7 @@ The third component is the frontend, where the user can visualize the received s
 
 ### Web Interface
 
-![Web Interface](docs/images/web-interface.png)
+![Web Interface](docs/images/web-interface1.png)
 
 The main page of the application where the receiver parameters can be configured.
 
